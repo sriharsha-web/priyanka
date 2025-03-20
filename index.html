@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Travel Agency</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        header p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #FF6B6B;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #ff4f4f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav ul li a {
+            display: block;
+            padding: 20px 25px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #FF6B6B;
+        }
+        
+        /* Main Content Styles */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            margin-bottom: 60px;
+        }
+        
+        section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #FF6B6B;
+            margin: 15px auto 0;
+        }
+        
+        /* Featured Destinations */
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .destination-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .destination-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .destination-info {
+            padding: 20px;
+        }
+        
+        .destination-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 22px;
+            color: #FF6B6B;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-img {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        /* Services */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #FF6B6B;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff4f4f;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 20px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #FF6B6B;
+            margin-top: 10px;
+        }
+        
+        .footer-column ul {
+            list-style-type: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #FF6B6B;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 36px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                height: 300px;
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Wanderlust</div>
+        <h1>Discover Your Dream Destination</h1>
+        <p>Experience the world's most breathtaking locations with our curated travel packages designed for unforgettable adventures.</p>
+        <a href="#destinations" class="cta-button">Explore Destinations</a>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Featured Destinations -->
+        <section id="destinations">
+            <h2>Featured Destinations</h2>
+            <div class="destinations">
+                <div class="destination-card">
+                    <div class="destination-img" style="background-image: url('/api/placeholder/400/300')"></div>
+                    <div class="destination-info">
+                        <h3>Santorini, Greece</h3>
+                        <p>Experience the stunning white-washed buildings, blue domes, and breathtaking sunsets of this Mediterranean paradise.</p>
+                        <div class="price">From $1,299</div>
+                        <a href="#" class="cta-button">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-img" style="background-image: url('/api/placeholder/400/300')"></div>
+                    <div class="destination-info">
+                        <h3>Bali, Indonesia</h3>
+                        <p>Discover lush landscapes, pristine beaches, and vibrant cultural experiences in this tropical haven.</p>
+                        <div class="price">From $1,099</div>
+                        <a href="#" class="cta-button">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-img" style="background-image: url('/api/placeholder/400/300')"></div>
+                    <div class="destination-info">
+                        <h3>Kyoto, Japan</h3>
+                        <p>Immerse yourself in ancient temples, traditional gardens, and the timeless beauty of Japanese culture.</p>
+                        <div class="price">From $1,499</div>
+                        <a href="#" class="cta-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us -->
+        <section id="about">
+            <h2>About Wanderlust</h2>
+            <div class="about-content">
+                <div>
+                    <p>Founded in 2010, Wanderlust Travel Agency has been helping travelers discover extraordinary destinations around the world. We believe travel should be transformative, enriching, and seamless.</p>
+                    <p>Our team of experienced travel consultants specializes in creating personalized itineraries that match your interests, preferences, and budget. Whether you're seeking adventure, relaxation, cultural immersion, or a mix of experiences, we're here to make your travel dreams a reality.</p>
+                    <p>With partnerships in over 100 countries, we offer exclusive access to unique accommodations, local guides, and authentic experiences that go beyond typical tourist attractions.</p>
+                </div>
+                <div class="about-img" style="background-image: url('/api/placeholder/500/400')"></div>
+            </div>
+        </section>
+        
+        <!-- Services -->
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Custom Itineraries</h3>
+                    <p>Tailored travel plans designed around your preferences, timeframe, and budget for a personalized experience.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏨</div>
+                    <h3>Premium Accommodations</h3>
+                    <p>Handpicked hotels, resorts, and unique stays that offer comfort, character, and excellent service.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🧭</div>
+                    <h3>Guided Tours</h3>
+                    <p>Expert local guides who provide insights, stories, and access to hidden gems in each destination.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Travel Insurance</h3>
+                    <p>Comprehensive coverage options to protect your journey, giving you peace of mind throughout your travels.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section id="testimonials">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Wanderlust planned our honeymoon to Italy and it was absolutely perfect. Every detail was taken care of, allowing us to simply enjoy our special trip. We can't wait to book our next adventure with them!"</p>
+                    <p class="testimonial-author">- Sarah & Michael Thompson</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a solo traveler, safety and authentic experiences are my priority. Wanderlust delivered on both counts for my trip to South America. Their local connections provided insights I never would have discovered on my own."</p>
+                    <p class="testimonial-author">- James Wilson</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Our family vacation to Thailand was the perfect balance of adventure and relaxation. The kids still talk about the elephant sanctuary and cooking class. Thank you for memories that will last a lifetime!"</p>
+                    <p class="testimonial-author">- The Rodriguez Family</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Form -->
+        <section id="contact">
+            <h2>Plan Your Journey</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination">Preferred Destination</label>
+                        <select id="destination">
+                            <option value="">Select a destination</option>
+                            <option value="europe">Europe</option>
+                            <option value="asia">Asia</option>
+                            <option value="africa">Africa</option>
+                            <option value="north-america">North America</option>
+                            <option value="south-america">South America</option>
+                            <option value="australia">Australia & Oceania</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="travel-date">Approximate Travel Date</label>
+                        <input type="date" id="travel-date">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="duration">Trip Duration (days)</label>
+                        <input type="number" id="duration" min="1" max="30" value="7">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" placeholder="Tell us about your travel preferences, interests, or any special requirements..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Inquiry</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Wanderlust Travel</h3>
+                <p>Your trusted partner for extraordinary travel experiences since 2010. We turn travel dreams into unforgettable memories.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Popular Destinations</h3>
+                <ul>
+                    <li><a href="#">Santorini, Greece</a></li>
+                    <li><a href="#">Bali, Indonesia</a></li>
+                    <li><a href="#">Kyoto, Japan</a></li>
+                    <li><a href="#">Machu Picchu, Peru</a></li>
+                    <li><a href="#">Amalfi Coast, Italy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>123 Travel Lane, Suite 400</li>
+                    <li>New York, NY 10001</li>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Email: info@wanderlust.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Wanderlust Travel Agency. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
